@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Luisa Bebel 💖🐾</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff5f7;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 35l-1.45-1.32C13.4 29.36 10 26.28 10 22.5 10 19.42 12.42 17 15.5 17c1.74 0 3.41.81 4.5 2.09C21.09 17.81 22.76 17 24.5 17 27.58 17 30 19.42 30 22.5c0 3.78-3.4 6.86-8.55 11.54L20 35z' fill='%23ffb6c1' fill-opacity='0.2'/%3E%3C/svg%3E");
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .cursive { font-family: 'Pacifico', cursive; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.4);
+            border: 4px solid #ffe4e8;
+            z-index: 10;
+        }
+
+        .heart-btn {
+            background: #ff6b95;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(255, 107, 149, 0.4);
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            background: #ff4d7d;
+        }
+
+        .heart-btn:active {
+            transform: scale(0.95);
+        }
+
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 4s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(var(--rotation)); opacity: 0; }
+        }
+
+        .main-heart {
+            font-size: 5rem;
+            display: inline-block;
+            animation: pulseCustom 2s infinite;
+        }
+
+        @keyframes pulseCustom {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="relative">
+        <div class="card p-8 md:p-12 text-center max-w-sm mx-4 relative overflow-hidden">
+            <div class="mb-4">
+                <span class="main-heart">💖</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl cursive text-pink-500 mb-2">Luisa Bebel</h1>
+            
+            <p class="text-gray-600 mb-8 mt-4 leading-relaxed font-medium">
+                Você é a pessoa mais especial do mundo! <br> Clique abaixo para uma surpresa!
+            </p>
+
+            <button onclick="superBurst(event)" class="heart-btn px-10 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 mx-auto group">
+                <span>Clique aqui, Luisa!</span>
+                <span class="group-hover:animate-bounce">🐾</span>
+            </button>
+
+            <div id="message" class="mt-8 text-pink-400 font-bold opacity-0 transition-all duration-500 transform translate-y-4 min-h-[1.5rem]">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const phrases = [
+            "Você é incrível! 💖",
+            "Luisa Bebel, você é luz! ✨",
+            "Muitos ronrons pra você! 🐾",
+            "Você brilha muito! 🌟",
+            "Te adoro mil milhões! 💞",
+            "Sua amizade é um tesouro! 💎",
+            "Você é única e especial! 🌈",
+            "Miau! Você é demais! 😸"
+        ];
+
+        const catEmojis = ["🐱", "😸", "🐈", "😻", "🐾", "😺", "😽"];
+
+        function createFloatingElement(x, y, isRandom = false, type = 'heart') {
+            const el = document.createElement('div');
+            el.className = 'floating-element';
+            
+            const startX = isRandom ? Math.random() * window.innerWidth : x + (Math.random() - 0.5) * 200;
+            const startY = isRandom ? window.innerHeight + 50 : y;
+
+            el.style.left = startX + 'px';
+            el.style.top = startY + 'px';
+            el.style.setProperty('--rotation', (Math.random() * 360) + 'deg');
+            
+            if (type === 'heart') {
+                const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#fb6f92', '#ff8fab', '#f472b6'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 25 + 15; 
+                el.innerHTML = `
+                    <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${color}" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1))">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                `;
+            } else {
+                const cat = catEmojis[Math.floor(Math.random() * catEmojis.length)];
+                el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                el.innerText = cat;
+            }
+            
+            document.body.appendChild(el);
+            
+            setTimeout(() => {
+                el.remove();
+            }, 4000);
+        }
+
+        function superBurst(event) {
+            const rect = event.target.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const msg = document.getElementById('message');
+            msg.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+            msg.style.opacity = '1';
+            msg.style.transform = 'translateY(0)';
+
+            // Explosão de 150 elementos (Corações e Gatinhos)
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const randomType = Math.random() > 0.4 ? 'heart' : 'cat';
+                    createFloatingElement(centerX, centerY, false, randomType);
+                }, i * 10);
+            }
+        }
+        
+        // Elementos aleatórios subindo continuamente ao fundo
+        setInterval(() => {
+            const randomType = Math.random() > 0.5 ? 'heart' : 'cat';
+            createFloatingElement(0, 0, true, randomType);
+        }, 600);
+    </script>
+</body>
+</html>
